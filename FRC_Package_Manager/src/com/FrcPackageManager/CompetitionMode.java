@@ -19,7 +19,7 @@ public class CompetitionMode {
         Properties prop = new Properties();
         //Load the file, catching any exceptions
         try {
-            prop.load(new FileInputStream("out/production/FRC_Package_Manager/com/FrcPackageManager/Config.properties"));
+            prop.load(new FileInputStream("FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

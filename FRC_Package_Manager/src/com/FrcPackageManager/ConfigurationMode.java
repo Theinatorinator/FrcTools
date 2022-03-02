@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ConfigurationMode {
     public void SetConfig() {
-        String propFileLocation = "out/production/FRC_Package_Manager/com/FrcPackageManager/Config.properties";
+        String propFileLocation = "FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
         //Set up file loading
         Properties prop = new Properties();
         try {
@@ -41,7 +41,7 @@ public class ConfigurationMode {
         userInput = scanner.next().trim();
         prop.setProperty("teamName", userInput);
         userInput= "";
-        System.out.print("Robot ip address");
+        System.out.print("Robot ip address: ");
         userInput = scanner.next().trim();
         prop.setProperty("robotIPAdder", userInput);
         userInput = "";

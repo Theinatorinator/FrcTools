@@ -16,19 +16,30 @@ public class ModeSelect {
         } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("\\?") && !userInput.matches("HELP")); {
             switch (userInput) {
                 //quit on input of 0
-                case "0" -> Quit();
+                case "0" :
+                    Quit();
+                    break;
 
                 //temp, probably configuration
-                case "1" -> configurationMode.SetConfig();
+                case "1" :
+                    configurationMode.SetConfig();
+                    break;
 
                 //temp, probably going to be updated
-                case "2" -> System.out.println("temp");
+                case "2" : System.out.println("temp");
+                    break;
 
                 //Competition mode
-                case "3" -> competitionMode.CompetitionModeMain();
+                case "3" : competitionMode.CompetitionModeMain();
+                    break;
 
                 //help
-                case "?","/?","HELP" -> Help();
+                case "?": Help();
+                    break;
+                case "/?" : Help();
+                    break;
+                case "HELP" : Help();
+                    break;
 
             }
         }
