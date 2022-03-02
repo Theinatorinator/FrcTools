@@ -20,23 +20,21 @@ public class CompetitionMode {
             e.printStackTrace();
         }
         //File loading
-        String driverStationLocation = prop.getProperty("driverStationLocation");
-        String robotRadioSSID = prop.getProperty("robotRadioSSID");
-        String robotRadioPSK = prop.getProperty("robotRadioPSK");
-        NetworkConnection(robotRadioSSID, robotRadioPSK);
+        String profileName = prop.getProperty("profileName");
+        NetworkConnection(profileName);
+        RunDriverStation(prop.getProperty("driverStationLocation"));
     }
-    public void NetworkConnection(String ssid, String password) {
-        String powerShellCommandBase = "netsh wlan connect ssid=\"";
-        String finalPowerShellCommand = powerShellCommandBase + ssid + "\" " + "key=\"" + password + "\"";
-        System.out.println(finalPowerShellCommand);
-        PowerShellResponse response = PowerShell.executeSingleCommand(finalPowerShellCommand);
-
+    public void NetworkConnection(String profileName) {
+        System.out.println("CONNECTING TO ROBOT NETWORK SPECIFIED IN CONFIG FILE");
+        String powerShellCommand = "netsh wlan connect name=" + profileName;
+        PowerShellResponse response = PowerShell.executeSingleCommand(powerShellCommand);
+        System.out.println(response);
     }
 
     public void RunDriverStation(String driveStation) {
-        String driverStationLocation = driveStation;
+        //System.out.println(driveStation);
         try {
-            Runtime.getRuntime().exec(driverStationLocation);
+            Runtime.getRuntime().exec(driveStation);
         } catch (IOException ex) {
             ex.printStackTrace();
             System.exit(3);
