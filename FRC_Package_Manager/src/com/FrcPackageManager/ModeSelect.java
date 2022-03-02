@@ -7,13 +7,14 @@ public class ModeSelect {
     public void ModeSelectUI() {
         CompetitionMode competitionMode = new CompetitionMode();
         ConfigurationMode configurationMode = new ConfigurationMode();
+        MusicMode musicMode = new MusicMode();
         Scanner scanner = new Scanner(System.in);
         String userInput;
         do {
             System.out.print("PLease select your mode: ");
             userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
 
-        } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("\\?") && !userInput.matches("HELP")); {
+        } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("4") && !userInput.matches("\\?") && !userInput.matches("HELP")); {
             switch (userInput) {
                 //quit on input of 0
                 case "0" :
@@ -31,6 +32,10 @@ public class ModeSelect {
 
                 //Competition mode
                 case "3" : competitionMode.CompetitionModeMain();
+                    break;
+
+                case "4" :
+                    musicMode.MusicModeInit();
                     break;
 
                 //help
