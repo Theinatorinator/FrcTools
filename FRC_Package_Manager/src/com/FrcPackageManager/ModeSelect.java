@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class ModeSelect {
     public void ModeSelectUI() {
         CompetitionMode competitionMode = new CompetitionMode();
+        ConfigurationMode configurationMode = new ConfigurationMode();
         Scanner scanner = new Scanner(System.in);
         String userInput;
         do {
@@ -18,7 +19,7 @@ public class ModeSelect {
                 case "0" -> Quit();
 
                 //temp, probably configuration
-                case "1" -> System.out.println("temp");
+                case "1" -> configurationMode.SetConfig();
 
                 //temp, probably going to be updated
                 case "2" -> System.out.println("temp");
