@@ -24,7 +24,7 @@ public class ModeSelect {
                 case "2" -> System.out.println("temp");
 
                 //Competition mode
-                case "3" -> competitionMode.CompetitionModeInit();
+                case "3" -> competitionMode.CompetitionModeMain();
 
                 //help
                 case "?","/?","HELP" -> Help();

@@ -8,22 +8,27 @@ import com.profesorfalken.jpowershell.PowerShellResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Scanner;
 
 public class CompetitionMode {
-    public void CompetitionModeInit() {
+    public void CompetitionModeMain() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Competition mode initializing");
+        String userInput = "";
        //prepare file loading
         Properties prop = new Properties();
         //Load the file, catching any exceptions
         try {
-            prop.load(new FileInputStream("out/production/FRC_Package_Manager/com/FrcPackageManager/CompetitionModeConfig.properties"));
+            prop.load(new FileInputStream("out/production/FRC_Package_Manager/com/FrcPackageManager/Config.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         //Load each individual variable form the config file
         String profileName = prop.getProperty("profileName");
+        String robotIPAdder = prop.getProperty("robotIPAdder");
         NetworkConnection(profileName);
         RunDriverStation(prop.getProperty("driverStationLocation"));
+
     }
     public void NetworkConnection(String profileName) {
         //Creates and then calls a powershell command which connects the computer to the specified network profile, need to add a network profile config in the config mode which will be added later
