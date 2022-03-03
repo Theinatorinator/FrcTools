@@ -1,9 +1,6 @@
 package com.FrcPackageManager;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,6 +11,8 @@ import java.util.Scanner;
 public class MusicMode {
     private final String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
     private final Properties prop = new Properties();
+    private final Scanner scanner = new Scanner(System.in);
+    private float storeVolume = 1;
     private Clip clip;
     public void MusicModeInit() {
         try {
@@ -30,14 +29,13 @@ public class MusicMode {
         PlayMusic(path);
     }
     public String MusicSelector() {
-        Scanner scanner = new Scanner(System.in);
         String userInput = "0";
         //ask what music to play
         do {
             System.out.println("What music should we play?");
             System.out.print("Music number: ");
             userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
-        } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("4") && !userInput.matches("\\?") && !userInput.matches("HELP") && !userInput.matches("STOP")); {
+        } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("4") && !userInput.matches("\\?") && !userInput.matches("HELP") && !userInput.matches("STOP")&& !userInput.matches("VOLUME")); {
             return userInput;
         }
     }
@@ -69,6 +67,9 @@ public class MusicMode {
             case "STOP":
                 StopClip();
                 break;
+            case "VOLUME":
+                VolumeControl();
+                break;
 
 
 
@@ -82,6 +83,7 @@ public class MusicMode {
             clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.start();
+            SetVolume(storeVolume);
             MusicModeInit();
         } catch (java.net.MalformedURLException ex) {
             ex.printStackTrace();
@@ -111,5 +113,29 @@ public class MusicMode {
         System.out.println("/?, ? or HELP for help");
         MusicModeMain();
 
+    }
+
+    public void VolumeControl() {
+        float userInput = 0;
+        float currentVolume = 0;
+        currentVolume = GetVolume();
+        System.out.println("The current volume is " + currentVolume);
+        System.out.print("Set new volume:  ");
+        userInput = scanner.nextFloat();
+        SetVolume(userInput);
+        storeVolume = userInput;
+        MusicModeMain();
+    }
+
+    public float GetVolume() {
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        return (float) Math.pow(10f, gainControl.getValue() / 20f);
+    }
+
+    public void SetVolume(float volume) {
+        if (volume < 0f || volume > 2f)
+            throw new IllegalArgumentException("Volume not valid: " + volume);
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(20f * (float) Math.log10(volume));
     }
 }
