@@ -11,7 +11,7 @@ public class ModeSelect {
         Scanner scanner = new Scanner(System.in);
         String userInput;
         do {
-            System.out.print("PLease select your mode: ");
+            System.out.print("Please select your mode: ");
             userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
 
         } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("4") && !userInput.matches("\\?") && !userInput.matches("HELP")); {

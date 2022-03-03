@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ConfigurationMode {
     public void SetConfig() {
-        String propFileLocation = "FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
+        String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
         //Set up file loading
         Properties prop = new Properties();
         try {

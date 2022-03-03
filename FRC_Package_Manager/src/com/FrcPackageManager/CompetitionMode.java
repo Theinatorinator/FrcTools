@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class CompetitionMode {
     public void CompetitionModeMain() {
+        String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Competition mode initializing");
         String userInput = "";
@@ -19,7 +20,7 @@ public class CompetitionMode {
         Properties prop = new Properties();
         //Load the file, catching any exceptions
         try {
-            prop.load(new FileInputStream("FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties"));
+            prop.load(new FileInputStream(propFileLocation));
         } catch (IOException e) {
             e.printStackTrace();
         }
