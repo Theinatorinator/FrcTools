@@ -3,6 +3,7 @@ package com.FrcPackageManager;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -10,6 +11,8 @@ public class ConfigurationMode {
     private final Properties prop = new Properties();
     private final String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
     private final ModeSelect modeSelect = new ModeSelect();
+    private boolean musicModeConfigUI = false;
+    Scanner scanner = new Scanner(System.in);
 
     public void ConfigModeInit() {
         try {
@@ -34,19 +37,67 @@ public class ConfigurationMode {
         ConfigModeGetUI();
         //confirm to user
         //set done proper to done
+        //config music mode with base
+        MusicModeConfig();
+        //if user wants to config music mode custom then they are entered into it
+        if (musicModeConfigUI == true) {
+            MusicModeConfigUI();
+        }
         System.out.println("Configuration Complete!!");
         prop.setProperty("configDone", "true");
-        //configure props for music mode
-        MusicModeConfig();
         //store all the props in a file
         ConfigStore();
         //go to mode select/main screen
         modeSelect.ModeSelectUI();
     }
+    private void MusicModeConfigUI() {
+        String userInput = "";
+        System.out.println("Welcome to the Music Mode configuration utility");
+        System.out.println("Here you wil configure music mode");
+        System.out.print("Music File one Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music1Name", userInput );
+        userInput = "";
+        System.out.print("Music File two Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music2Name", userInput );
+        userInput = "";
+        System.out.print("Music File three Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music3Name", userInput );
+        userInput = "";
+        System.out.print("Music File four Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music4Name", userInput );
+        userInput = "";
+        System.out.print("Music File five Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music5Name", userInput );
+        userInput = "";
+        System.out.print("Music File six Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music6Name", userInput );
+        userInput = "";
+        System.out.print("Music File seven Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music7Name", userInput );
+        userInput = "";
+        System.out.print("Music File eight Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music8Name", userInput );
+        userInput = "";
+        System.out.print("Music File nine Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music9Name", userInput );
+        userInput = "";
+        System.out.print("Music File ten Name: ");
+        userInput = scanner.next().trim();
+        prop.setProperty("music10Name", userInput );
+        userInput = "";
 
+    }
     private void ConfigModeGetUI() {
         //Set up Configs
-        Scanner scanner = new Scanner(System.in);
         String userInput = "";
         System.out.println("Welcome to the configuration utility");
         System.out.println("Here you wil configure robot properties and team name");
@@ -71,12 +122,39 @@ public class ConfigurationMode {
         userInput = scanner.nextLine();
         prop.setProperty("driverStationLocation", userInput);
         userInput = "";
+        do {
+            System.out.print("Would you like to enter Music Mode config: ");
+            userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
+        } while (userInput.matches("Y") && userInput.matches("N")); {
+            if (userInput.matches("Y")) {
+                musicModeConfigUI = true;
+            }
+        }
+
+
     }
     private void MusicModeConfig() {
         prop.setProperty("song1", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music1.wav");
         prop.setProperty("song2", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music2.wav");
         prop.setProperty("song3", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music3.wav");
         prop.setProperty("song4", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music4.wav");
+        prop.setProperty("song5", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music5.wav");
+        prop.setProperty("song6", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music6.wav");
+        prop.setProperty("song7", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music7.wav");
+        prop.setProperty("song8", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music8.wav");
+        prop.setProperty("song9", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music9.wav");
+        prop.setProperty("song10", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music10.wav");
+        prop.setProperty("music1Name", "Air Raid Siren");
+        prop.setProperty("music2Name", "Fresh Friday");
+        prop.setProperty("music3Name", "GIGA CHAD");
+        prop.setProperty("music4Name", "modern desert music");
+        prop.setProperty("music5Name", "Dies Eire");
+        prop.setProperty("music6Name", "music1");
+        prop.setProperty("music7Name", "music1");
+        prop.setProperty("music8Name", "music1");
+        prop.setProperty("music9Name", "music1");
+        prop.setProperty("music10Name", "music1");
+
     }
     private void ConfigStore() {
         try {
