@@ -9,7 +9,7 @@ import java.util.Properties;
 public class Main {
 
     public static void main(String[] args) {
-        String propFileLocation = "out/production/FRC_Package_Manager/com/FrcPackageManager/Config.properties";
+        String propFileLocation = "FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
         ModeSelect modeSelect = new ModeSelect();
         CompetitionMode competitionMode = new CompetitionMode();
         ConfigurationMode configurationMode = new ConfigurationMode();
