@@ -129,7 +129,7 @@ public class MusicMode {
             clip.open(audioIn);
             clip.start();
             SetVolume(storeVolume);
-            MusicModeInit();
+            MusicModeMain();
         } catch (java.net.MalformedURLException ex) {
             ex.printStackTrace();
             System.exit(1);
