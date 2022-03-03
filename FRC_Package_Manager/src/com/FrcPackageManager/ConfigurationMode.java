@@ -7,10 +7,11 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class ConfigurationMode {
-    public void SetConfig() {
-        String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
-        //Set up file loading
-        Properties prop = new Properties();
+    private final Properties prop = new Properties();
+    private final String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
+    private final ModeSelect modeSelect = new ModeSelect();
+
+    public void ConfigModeInit() {
         try {
             FileOutputStream out = new FileOutputStream(propFileLocation);
             prop.store(out, null);
@@ -26,8 +27,24 @@ public class ConfigurationMode {
             e.printStackTrace();
             System.exit(3);
         }
-        //set up other classes
-        ModeSelect modeSelect = new ModeSelect();
+        SetConfigMain();
+    }
+    public void SetConfigMain() {
+        //Get UI
+        ConfigModeGetUI();
+        //confirm to user
+        //set done proper to done
+        System.out.println("Configuration Complete!!");
+        prop.setProperty("configDone", "true");
+        //configure props for music mode
+        MusicModeConfig();
+        //store all the props in a file
+        ConfigStore();
+        //go to mode select/main screen
+        modeSelect.ModeSelectUI();
+    }
+
+    private void ConfigModeGetUI() {
         //Set up Configs
         Scanner scanner = new Scanner(System.in);
         String userInput = "";
@@ -54,10 +71,14 @@ public class ConfigurationMode {
         userInput = scanner.nextLine();
         prop.setProperty("driverStationLocation", userInput);
         userInput = "";
-
-        System.out.println("Configuration Complete!!");
-        prop.setProperty("configDone", "true");
-
+    }
+    private void MusicModeConfig() {
+        prop.setProperty("song1", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music1.wav");
+        prop.setProperty("song2", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music2.wav");
+        prop.setProperty("song3", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music3.wav");
+        prop.setProperty("song4", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music4.wav");
+    }
+    private void ConfigStore() {
         try {
             //stores everything in memory into the properties file
             FileOutputStream out = new FileOutputStream(propFileLocation);
@@ -65,7 +86,5 @@ public class ConfigurationMode {
         }  catch (java.io.IOException ex) {
             ex.printStackTrace();
         }
-
-        modeSelect.ModeSelectUI();
     }
 }

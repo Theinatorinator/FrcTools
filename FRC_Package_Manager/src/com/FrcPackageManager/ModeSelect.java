@@ -23,7 +23,7 @@ public class ModeSelect {
 
                 //temp, probably configuration
                 case "1" :
-                    configurationMode.SetConfig();
+                    configurationMode.ConfigModeInit();
                     break;
 
                 //temp, probably going to be updated

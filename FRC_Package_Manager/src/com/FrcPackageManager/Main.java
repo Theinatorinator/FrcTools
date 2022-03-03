@@ -29,7 +29,7 @@ public class Main {
             modeSelect.ModeSelectUI();
         }
         if (configDoneString.matches("false")) {
-            configurationMode.SetConfig();
+            configurationMode.ConfigModeInit();
         }
     }
 }

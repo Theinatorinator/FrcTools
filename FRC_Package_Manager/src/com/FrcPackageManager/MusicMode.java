@@ -5,12 +5,26 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class MusicMode {
+    private final String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
+    private final Properties prop = new Properties();
     private Clip clip;
     public void MusicModeInit() {
+        try {
+            prop.load(new FileInputStream(propFileLocation));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(3);
+        }
+        MusicModeMain();
+    }
+    public void MusicModeMain() {
         String musicToBePlayed = MusicSelector();
         String path = StringToPath(musicToBePlayed);
         PlayMusic(path);
@@ -28,6 +42,7 @@ public class MusicMode {
         }
     }
     public String StringToPath(String music) {
+
         ModeSelect modeSelect = new ModeSelect();
         switch (music) {
             case "0" :
@@ -35,13 +50,13 @@ public class MusicMode {
                 modeSelect.ModeSelectUI();
                 break;
             case "1" :
-                return "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/raid.wav";
+                return prop.getProperty("song1");
             case "2" :
-                return "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/freshFriday.wav";
+                return prop.getProperty("song2");
             case "3" :
-                return  "";
+                return  prop.getProperty("song3");
             case  "4" :
-                return "";
+                return  prop.getProperty("song4");
             case  "?" :
                 Help();
                 break;
@@ -90,11 +105,11 @@ public class MusicMode {
     public void Help() {
         System.out.println("0 to EXIT");
         System.out.println("1 For AIR RAID SIREN");
-        System.out.println("3 for ");
-        System.out.println("4 for");
-        System.out.printf("stop to stop");
+        System.out.println("3 for GIGA CHAD MUSIC");
+        System.out.println("4 for modern desert music");
+        System.out.println("stop to stop");
         System.out.println("/?, ? or HELP for help");
-        MusicModeInit();
+        MusicModeMain();
 
     }
 }
