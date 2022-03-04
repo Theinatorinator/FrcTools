@@ -102,7 +102,7 @@ public class ToolsManager {
     }
 
     private void  GetWpiLib() {
-        String wpiLibLocation = "https://www.bensound.com/bensound-music/bensound-acousticbreeze.mp3";
+        String wpiLibLocation = "https://github.com/wpilibsuite/allwpilib/releases/download/v2022.4.1/WPILib_Windows64-2022.4.1.iso";
         String downloadOutput = "C:\\Program Files\\FRC_Tools\\bensound-acousticbreeze.mp3";
         DownloadFiles(wpiLibLocation, downloadOutput);
 
