@@ -1,8 +1,6 @@
 package com.FrcPackageManager;
 
 
-
-
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +11,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MusicMode {
-    String propFileLocation = "C:\\Program Files\\FRC_Tools\\Config\\Config.properties";
+    String propFileLocation = "src/main/resources/Config.properties";
     Properties prop = new Properties();
     Scanner scanner = new Scanner(System.in);
     float storeVolume = 1;
@@ -43,7 +41,7 @@ public class MusicMode {
     }
 
     public String MusicSelector() {
-        String userInput = "0";
+        String userInput;
         //ask what music to play
         do {
             System.out.print("Music Command: ");
@@ -57,58 +55,54 @@ public class MusicMode {
     public String StringToPath(String music) {
 
         switch (music) {
-            case "0":
-                modeSelect.ModeSelectUI();
-                break;
-            case "1":
+            case "0" -> modeSelect.ModeSelectUI();
+            case "1" -> {
                 System.out.println("now playing " + prop.getProperty("music1Name"));
                 return prop.getProperty("song1");
-            case "2":
+            }
+            case "2" -> {
                 System.out.println("now playing " + prop.getProperty("music2Name"));
                 return prop.getProperty("song2");
-            case "3":
+            }
+            case "3" -> {
                 System.out.println("now playing " + prop.getProperty("music3Name"));
                 return prop.getProperty("song3");
-            case "4":
+            }
+            case "4" -> {
                 System.out.println("now playing " + prop.getProperty("music4Name"));
                 return prop.getProperty("song4");
-            case "5":
+            }
+            case "5" -> {
                 System.out.println("now playing " + prop.getProperty("music5Name"));
                 return prop.getProperty("song5");
-            case "6":
+            }
+            case "6" -> {
                 System.out.println("now playing " + prop.getProperty("music6Name"));
                 return prop.getProperty("song6");
-            case "7":
+            }
+            case "7" -> {
                 System.out.println("now playing " + prop.getProperty("music7Name"));
                 return prop.getProperty("song7");
-            case "8":
+            }
+            case "8" -> {
                 System.out.println("now playing " + prop.getProperty("music8Name"));
                 return prop.getProperty("song8");
-            case "9":
+            }
+            case "9" -> {
                 System.out.println("now playing " + prop.getProperty("music9Name"));
                 return prop.getProperty("song9");
-            case "10":
+            }
+            case "10" -> {
                 System.out.println("now playing " + prop.getProperty("music10Name"));
                 return prop.getProperty("song10");
-            case "?":
-                Help();
-                break;
-            case "/?":
-                Help();
-                break;
-            case "HELP":
-                Help();
-                break;
-            case "STOP":
-                StopClip();
-                break;
-            case "VOLUME":
-                VolumeControl();
-                break;
-            case "LOOP":
-                loopMode();
-                break;
-            case "RADIO":
+            }
+            case "?"  -> Help();
+            case "/?" -> Help();
+            case "HELP" -> Help();
+            case "STOP" -> StopClip();
+            case "VOLUME" -> VolumeControl();
+            case "LOOP" -> loopMode();
+            case "RADIO" -> {
                 radioMode = true;
                 System.out.println("Now starting Radio");
                 try {
@@ -117,8 +111,7 @@ public class MusicMode {
                     e.printStackTrace();
                 }
                 return "1";
-
-
+            }
         }
 
         return "1";
@@ -133,17 +126,8 @@ public class MusicMode {
             clip.start();
             SetVolume(storeVolume);
             MusicModeMain();
-        } catch (java.net.MalformedURLException ex) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             ex.printStackTrace();
-            System.exit(1);
-        } catch (javax.sound.sampled.UnsupportedAudioFileException ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        } catch (java.io.IOException ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
             System.exit(1);
         }
 
@@ -158,17 +142,8 @@ public class MusicMode {
             clip.stop();
             clip.start();
             SetVolume(storeVolume);
-        } catch (java.net.MalformedURLException ex) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             ex.printStackTrace();
-            System.exit(1);
-        } catch (javax.sound.sampled.UnsupportedAudioFileException ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        } catch (java.io.IOException ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
             System.exit(1);
         }
 
@@ -191,15 +166,15 @@ public class MusicMode {
     }
 
     public void VolumeControl() {
-        float userInput = 0;
-        float currentVolume = 0;
+        float userInput;
+        float currentVolume;
         currentVolume = GetVolume();
         System.out.println("The current volume is " + currentVolume);
         System.out.print("Set new volume:  ");
         userInput = scanner.nextFloat();
         SetVolume(userInput);
         storeVolume = userInput;
-        System.out.printf("The Volume is now" + currentVolume);
+        System.out.print("The Volume is now" + currentVolume);
         MusicModeMain();
     }
 
@@ -216,8 +191,8 @@ public class MusicMode {
     }
 
     public void loopMode() {
-        int times = 5;
-        int userInput = 0;
+        int times;
+        int userInput;
         System.out.print("how many times to loop: ");
         userInput = scanner.nextInt();
         times = userInput;
@@ -232,7 +207,7 @@ public class MusicMode {
         do {
             int length = clip.getFrameLength();
             if (clip.getFramePosition() == length) {
-                if (threadLaunched == false){
+                if (!threadLaunched){
                     new Thread(radioStopThread).start();
                     threadLaunched = true;
                 }
@@ -245,8 +220,7 @@ public class MusicMode {
             }
 
 
-        } while (radioMode == true);
-        radioMode = false;
+        } while (radioMode);
         clip.stop();
         MusicModeMain();
     }
@@ -254,7 +228,7 @@ public class MusicMode {
     Runnable radioStopThread = new Runnable() {
         @Override
         public void run() {
-            String userInput = "";
+            String userInput;
             do {
                 userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
             } while (!userInput.matches("STOP")); {

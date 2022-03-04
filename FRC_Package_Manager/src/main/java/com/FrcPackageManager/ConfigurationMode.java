@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ConfigurationMode {
     private final Properties prop = new Properties();
-    private final String propFileLocation = "C:\\Program Files\\FRC_Tools\\Config\\Config.properties";
+    private final String propFileLocation = "src/main/resources/Config.properties";
     private boolean musicModeConfigUI = false;
     Scanner scanner = new Scanner(System.in);
     ModeSelect modeSelect = new ModeSelect();
@@ -18,9 +18,7 @@ public class ConfigurationMode {
         try {
             FileOutputStream out = new FileOutputStream(propFileLocation);
             prop.store(out, null);
-        } catch (java.io.FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (java.io.IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
         //Load the file, catching any exceptions
@@ -40,7 +38,7 @@ public class ConfigurationMode {
         //config music mode with base
         MusicModeConfig();
         //if user wants to config music mode custom then they are entered into it
-        if (musicModeConfigUI == true) {
+        if (musicModeConfigUI) {
             MusicModeConfigUI();
         }
         System.out.println("Configuration Complete!!");
@@ -51,77 +49,62 @@ public class ConfigurationMode {
         modeSelect.ModeSelectUI();
     }
     private void MusicModeConfigUI() {
-        String userInput = "";
+        String userInput;
         System.out.println("Welcome to the Music Mode configuration utility");
         System.out.println("Here you wil configure music mode");
         System.out.print("Music File one Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music1Name", userInput );
-        userInput = "";
         System.out.print("Music File two Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music2Name", userInput );
-        userInput = "";
         System.out.print("Music File three Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music3Name", userInput );
-        userInput = "";
         System.out.print("Music File four Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music4Name", userInput );
-        userInput = "";
         System.out.print("Music File five Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music5Name", userInput );
-        userInput = "";
         System.out.print("Music File six Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music6Name", userInput );
-        userInput = "";
         System.out.print("Music File seven Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music7Name", userInput );
-        userInput = "";
         System.out.print("Music File eight Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music8Name", userInput );
-        userInput = "";
         System.out.print("Music File nine Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music9Name", userInput );
-        userInput = "";
         System.out.print("Music File ten Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("music10Name", userInput );
-        userInput = "";
 
     }
     private void ConfigModeGetUI() {
         //Set up Configs
-        String userInput = "";
+        String userInput;
         System.out.println("Welcome to the configuration utility");
         System.out.println("Here you wil configure robot properties and team name");
         System.out.print("Team Number: ");
         userInput = scanner.next().trim();
         prop.setProperty("teamNumber", userInput );
-        userInput = "";
         System.out.print("Team Name: ");
         userInput = scanner.next().trim();
         prop.setProperty("teamName", userInput);
-        userInput= "";
         System.out.print("Robot ip address: ");
         userInput = scanner.next().trim();
         prop.setProperty("robotIPAdder", userInput);
-        userInput = "";
         System.out.print("Wifi Profile Name, this is what you click on in the wifi gui, example 7540: ");
         userInput = scanner.next().trim();
         prop.setProperty("profileName", userInput);
-        userInput = "";
         System.out.print("Location of drive station exe: ");
         scanner.nextLine();
         userInput = scanner.nextLine();
         prop.setProperty("driverStationLocation", userInput);
-        userInput = "";
         do {
             System.out.print("Would you like to enter Music Mode config: ");
             userInput = scanner.next().trim().toUpperCase(Locale.ROOT);

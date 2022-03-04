@@ -10,7 +10,7 @@ import java.util.Properties;
 public class Main {
 
     public static void main(String[] args) {
-        String propFileLocation = "C:\\Program Files\\FRC_Tools\\Config\\Config.properties";
+        String propFileLocation = "C:src/main/resources/Config.properties";
         ModeSelect modeSelect = new ModeSelect();
         ConfigurationMode configurationMode = new ConfigurationMode();
         Properties prop = new Properties();
