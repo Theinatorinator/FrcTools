@@ -86,9 +86,9 @@ public class ToolsManager {
             if (userInput == "Y") {
                 downloadGameManual = true;
             }
-                if (userInput1 == "Y") {
-                   downloadWPI = true;
-                }
+            if (userInput1 == "Y") {
+                downloadWPI = true;
+            }
 
         DownloadFromUI(downloadWPI, downloadGameManual);
 
@@ -131,7 +131,7 @@ public class ToolsManager {
         if (wpi = true) {
             if (man) {
                 DownloadAll();
-            } else {
+            } else if (wpi = true) {
                 GetWpiLib();
             }
         }

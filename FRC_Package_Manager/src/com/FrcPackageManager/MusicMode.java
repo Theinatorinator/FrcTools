@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MusicMode {
-    String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
+    String propFileLocation = "C:\\Program Files\\FRC_Tools\\Config\\Config.properties";
     Properties prop = new Properties();
     Scanner scanner = new Scanner(System.in);
     float storeVolume = 1;

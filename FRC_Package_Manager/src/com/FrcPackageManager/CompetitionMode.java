@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class CompetitionMode {
     public void CompetitionModeMain() {
-        String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
+        String propFileLocation = "C:\\Program Files\\FRC_Tools\\Config\\Config.properties";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Competition mode initializing");
         String userInput = "";

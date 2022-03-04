@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ConfigurationMode {
     private final Properties prop = new Properties();
-    private final String propFileLocation = "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/Config.properties";
+    private final String propFileLocation = "C:\\Program Files\\FRC_Tools\\Config\\Config.properties";
     private final ModeSelect modeSelect = new ModeSelect();
     private boolean musicModeConfigUI = false;
     Scanner scanner = new Scanner(System.in);
@@ -134,16 +134,16 @@ public class ConfigurationMode {
 
     }
     private void MusicModeConfig() {
-        prop.setProperty("song1", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music1.wav");
-        prop.setProperty("song2", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music2.wav");
-        prop.setProperty("song3", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music3.wav");
-        prop.setProperty("song4", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music4.wav");
-        prop.setProperty("song5", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music5.wav");
-        prop.setProperty("song6", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music6.wav");
-        prop.setProperty("song7", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music7.wav");
-        prop.setProperty("song8", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music8.wav");
-        prop.setProperty("song9", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music9.wav");
-        prop.setProperty("song10", "out/production/FRC_Package_Manager/out/production/FRC_Package_Manager/com/frcpackagemanager/music10.wav");
+        prop.setProperty("song1", "C:\\Program Files\\FRC_Tools\\Music\\music1.wav");
+        prop.setProperty("song2", "C:\\Program Files\\FRC_Tools\\Music\\music2.wav");
+        prop.setProperty("song3", "C:\\Program Files\\FRC_Tools\\Music\\music3.wav");
+        prop.setProperty("song4", "C:\\Program Files\\FRC_Tools\\Music\\music4.wav");
+        prop.setProperty("song5", "C:\\Program Files\\FRC_Tools\\Music\\music5.wav");
+        prop.setProperty("song6", "C:\\Program Files\\FRC_Tools\\Music\\music6.wav");
+        prop.setProperty("song7", "C:\\Program Files\\FRC_Tools\\Music\\music7.wav");
+        prop.setProperty("song8", "C:\\Program Files\\FRC_Tools\\Music\\music8.wav");
+        prop.setProperty("song9", "C:\\Program Files\\FRC_Tools\\Music\\music9.wav");
+        prop.setProperty("song10", "C:\\Program Files\\FRC_Tools\\Music\\music10.wav");
         prop.setProperty("music1Name", "Air Raid Siren");
         prop.setProperty("music2Name", "Fresh Friday");
         prop.setProperty("music3Name", "GIGA CHAD");
