@@ -20,59 +20,46 @@ public class ModeSelect {
         } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("4") && !userInput.matches("EXIT") && !userInput.matches("CONFIG") && !userInput.matches("TOOLS") && !userInput.matches("COMPETITION") && !userInput.matches("MUSIC")&& !userInput.matches("\\?") && !userInput.matches("HELP")); {
             switch (userInput) {
                 //quit on input of 0
-                case "0" :
-                    Quit();
-                    break;
+                case "0" -> Quit();
+
 
                 //config mode
-                case "1" :
-                    configurationMode.ConfigModeInit();
-                    break;
+                case "1" -> configurationMode.ConfigModeInit();
+
 
                 //tools mode
-                case "2" :
-                    toolsManager.ToolsManagerInit();
-                    break;
+                case "2" -> toolsManager.ToolsManagerInit();
+
 
                 //Competition mode
-                case "3" : competitionMode.CompetitionModeMain();
-                    break;
+                case "3" -> competitionMode.CompetitionModeMain();
 
-                    //music mode
-                case "4" :
-                    musicMode.MusicModeInit();
-                    break;
 
-                    //exit
-                case "EXIT":
-                    Quit();
-                    break;
-                    //config mode
-                case "CONFIG":
-                        configurationMode.ConfigModeInit();
-                        break;
-                     //tools mode
-                case "TOOLS":
-                    toolsManager.ToolsManagerInit();
-                    break;
-                    //competition mode
-                case "COMPETITION":
-                    competitionMode.CompetitionModeMain();
-                    break;
+                //music mode
+                case "4" -> musicMode.MusicModeInit();
 
-                    //music mode
-                case "MUSIC":
-                    musicMode.MusicModeInit();
-                    break;
+
+                //exit
+                case "EXIT" -> Quit();
+
+                //config mode
+                case "CONFIG" -> configurationMode.ConfigModeInit();
+
+                //tools mode
+                case "TOOLS" -> toolsManager.ToolsManagerInit();
+
+                //competition mode
+                case "COMPETITION" -> competitionMode.CompetitionModeMain();
+
+
+                //music mode
+                case "MUSIC" -> musicMode.MusicModeInit();
+
 
                 //help
-                case "?": Help();
-                    break;
-                case "/?" : Help();
-                    break;
-                case "HELP" : Help();
-                    break;
-
+                case "?" -> Help();
+                case "/?" -> Help();
+                case "HELP" -> Help();
             }
         }
 

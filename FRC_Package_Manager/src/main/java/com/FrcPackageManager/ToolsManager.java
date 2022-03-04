@@ -13,12 +13,12 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class ToolsManager {
-    private final String directoryLocation = "C:\\Program Files\\FRC_Tools\\";
     private final Scanner scanner = new Scanner(System.in);
     private boolean downloading = false;
     ModeSelect modeSelect = new ModeSelect();
     public void ToolsManagerInit() {
         try {
+            String directoryLocation = "C:\\Program Files\\FRC_Tools\\";
             Files.createDirectories(Paths.get(directoryLocation));
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,6 +40,7 @@ public class ToolsManager {
         }
         ReadableByteChannel rbc = null;
         try {
+            assert website != null;
             rbc = Channels.newChannel(website.openStream());
             //System.out.println("rbc");
         } catch (IOException e) {
@@ -56,6 +57,7 @@ public class ToolsManager {
         try {
             new Thread(runnable).start();
             System.out.print("DOWNLOADING: ");
+            assert fos != null;
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +79,6 @@ public class ToolsManager {
         } while (!userInput.matches("N") && !userInput.matches("Y"));
         do {
             System.out.print("would you like to download the 2022 wpilibs (y/n): ");
-            userInput1 = "";
             userInput1 = scanner.next().trim().toUpperCase(Locale.ROOT);
 
         } while (!userInput1.matches("N") && !userInput1.matches("Y"));
@@ -114,14 +115,9 @@ public class ToolsManager {
     }
 
 
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-           ProgressBar();
-        }
-    };
+    Runnable runnable = this::ProgressBar;
     private void ProgressBar() {
-            while (downloading == true) {
+            while (downloading) {
                 System.out.print(".");
                 try {
                     Thread.sleep(1000);
@@ -165,12 +161,12 @@ public class ToolsManager {
     }
 
     private void UIForWPI() {
-        String userInput = "";
+        String userInput;
         do {
             System.out.print("Would you like to run WPILIBS installer (y/n):");
             userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
         } while (!userInput.matches("N") && !userInput.matches("Y"));
-        if (userInput == "Y") {
+        if (userInput.equals("Y")) {
             RunWPI();
         }
         modeSelect.ModeSelectUI();
