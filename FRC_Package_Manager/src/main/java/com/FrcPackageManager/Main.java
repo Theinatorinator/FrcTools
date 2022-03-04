@@ -1,17 +1,17 @@
 package com.FrcPackageManager;
 
 
+import com.FrcPackageManager.ConfigurationMode;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
 
 public class Main {
 
     public static void main(String[] args) {
         String propFileLocation = "C:\\Program Files\\FRC_Tools\\Config\\Config.properties";
         ModeSelect modeSelect = new ModeSelect();
-        CompetitionMode competitionMode = new CompetitionMode();
         ConfigurationMode configurationMode = new ConfigurationMode();
         Properties prop = new Properties();
         //set up prop file loading

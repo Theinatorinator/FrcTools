@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class ConfigurationMode {
     private final Properties prop = new Properties();
     private final String propFileLocation = "C:\\Program Files\\FRC_Tools\\Config\\Config.properties";
-    private final ModeSelect modeSelect = new ModeSelect();
     private boolean musicModeConfigUI = false;
     Scanner scanner = new Scanner(System.in);
+    ModeSelect modeSelect = new ModeSelect();
 
     public void ConfigModeInit() {
         try {

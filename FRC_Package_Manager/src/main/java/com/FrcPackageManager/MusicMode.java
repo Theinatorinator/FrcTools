@@ -1,5 +1,8 @@
 package com.FrcPackageManager;
 
+
+
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +23,7 @@ public class MusicMode {
     int randomNumber = 1;
     int minSong = 1;
     int maxSong = 5;
+    ModeSelect modeSelect = new ModeSelect();
 
     public void MusicModeInit() {
         try {
@@ -52,7 +56,6 @@ public class MusicMode {
 
     public String StringToPath(String music) {
 
-        ModeSelect modeSelect = new ModeSelect();
         switch (music) {
             case "0":
                 modeSelect.ModeSelectUI();
@@ -196,6 +199,7 @@ public class MusicMode {
         userInput = scanner.nextFloat();
         SetVolume(userInput);
         storeVolume = userInput;
+        System.out.printf("The Volume is now" + currentVolume);
         MusicModeMain();
     }
 

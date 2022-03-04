@@ -1,5 +1,7 @@
 package com.FrcPackageManager;
 
+
+
 import java.util.Locale;
 import java.util.Scanner;
 //ask the user what mode to enter, currently this only allows from competition mode but other modes such as programing/updating are in the works

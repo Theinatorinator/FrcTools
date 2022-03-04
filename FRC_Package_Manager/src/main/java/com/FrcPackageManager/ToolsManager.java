@@ -1,6 +1,5 @@
 package com.FrcPackageManager;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -83,13 +82,17 @@ public class ToolsManager {
 
         } while (!userInput1.matches("N") && !userInput1.matches("Y"));
 
-            if (userInput == "Y") {
+            if (userInput.matches("Y")) {
                 downloadGameManual = true;
             }
-            if (userInput1 == "Y") {
+            if (userInput1.matches("Y")) {
                 downloadWPI = true;
             }
-
+        //System.out.println(userInput);
+        //System.out.println(userInput1);
+        //System.out.println(downloadGameManual);
+        //System.out.println(downloadWPI);
+        //System.out.println("test");
         DownloadFromUI(downloadWPI, downloadGameManual);
 
     }
@@ -98,12 +101,14 @@ public class ToolsManager {
         //System.out.print("test");
         String gameManualLocation = "https://firstfrc.blob.core.windows.net/frc2022/Manual/2022FRCGameManual.pdf";
         String downloadOutput = "C:\\Program Files\\FRC_Tools\\2022GameManual.pdf";
+        System.out.println("Getting manual");
         DownloadFiles(gameManualLocation, downloadOutput);
     }
 
     private void  GetWpiLib() {
         String wpiLibLocation = "https://github.com/wpilibsuite/allwpilib/releases/download/v2022.4.1/WPILib_Windows64-2022.4.1.iso";
-        String downloadOutput = "C:\\Program Files\\FRC_Tools\\bensound-acousticbreeze.mp3";
+        String downloadOutput = "C:\\Program Files\\FRC_Tools\\WPILib_Windows64-2022.4.1.iso";
+        System.out.println("getting WPILIBS");
         DownloadFiles(wpiLibLocation, downloadOutput);
 
     }
@@ -127,23 +132,47 @@ public class ToolsManager {
     }
 
     private void DownloadFromUI(boolean wpi, boolean man ) {
+        String wpiLibs = String.valueOf(wpi);
+        String manual = String.valueOf(man);
 
-        if (wpi = true) {
-            if (man) {
-                DownloadAll();
-            } else if (wpi = true) {
+        switch (wpiLibs){
+            case "true" :
                 GetWpiLib();
-            }
+                break;
+            case "false" :
+                break;
         }
-        if (man = true) {
-            GetGameManual();
+
+        switch (manual) {
+            case "true" :
+                GetGameManual();
+                break;
+            case "false" :
+                break;
+        }
+        UIForWPI();
+    }
+
+
+
+    private void RunWPI() {
+        String wpiLocation = "C:\\Program Files\\FRC_Tools\\WPILib_Windows64-2022.4.1.iso";
+        try {
+            Runtime.getRuntime().exec(wpiLocation);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void DownloadAll() {
-        GetWpiLib();
-        GetGameManual();
-        System.out.printf("ALL DOWNLOAD COMPLETE");
+    private void UIForWPI() {
+        String userInput = "";
+        do {
+            System.out.print("Would you like to run WPILIBS installer (y/n):");
+            userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
+        } while (!userInput.matches("N") && !userInput.matches("Y"));
+        if (userInput == "Y") {
+            RunWPI();
+        }
         modeSelect.ModeSelectUI();
     }
 }
