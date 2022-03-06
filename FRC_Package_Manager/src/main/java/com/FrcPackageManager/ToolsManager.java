@@ -146,11 +146,11 @@ public class ToolsManager {
             case "false" :
                 break;
         }
-        UIForWPI();
+        //UIForWPI();
     }
 
 
-
+    /*
     private void RunWPI() {
         String wpiLocation = "C:\\Program Files\\FRC_Tools\\WPILib_Windows64-2022.4.1.iso";
         try {
@@ -171,4 +171,5 @@ public class ToolsManager {
         }
         modeSelect.ModeSelectUI();
     }
+     */
 }
