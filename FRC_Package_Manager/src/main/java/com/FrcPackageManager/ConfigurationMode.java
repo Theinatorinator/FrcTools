@@ -133,11 +133,11 @@ public class ConfigurationMode {
         prop.setProperty("music3Name", "GIGA CHAD");
         prop.setProperty("music4Name", "modern desert music");
         prop.setProperty("music5Name", "Dies Eire");
-        prop.setProperty("music6Name", "music1");
-        prop.setProperty("music7Name", "music1");
-        prop.setProperty("music8Name", "music1");
-        prop.setProperty("music9Name", "music1");
-        prop.setProperty("music10Name", "music1");
+        prop.setProperty("music6Name", "DOOM music - The only Thing they fear is you");
+        prop.setProperty("music7Name", "National Anthem Of The USSR");
+        prop.setProperty("music8Name", "SLAVA UKRAINE -- Ukrainian national anthem ");
+        prop.setProperty("music9Name", "Fortunate son");
+        prop.setProperty("music10Name", "ඞඞඞඞඞඞඞඞඞඞඞ amogus SUS");
 
     }
     private void ConfigStore() {

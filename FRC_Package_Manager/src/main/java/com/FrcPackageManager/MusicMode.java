@@ -20,7 +20,7 @@ public class MusicMode {
     Random random = new Random();
     int randomNumber = 1;
     int minSong = 1;
-    int maxSong = 5;
+    int maxSong = 10;
     ModeSelect modeSelect = new ModeSelect();
 
     public void MusicModeInit() {
