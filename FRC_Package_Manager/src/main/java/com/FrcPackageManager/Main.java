@@ -26,10 +26,25 @@ public class Main {
         String teamNumber = prop.getProperty("teamNumber");
         if (configDoneString.matches("true")) {
             System.out.println("Hello team " + teamNumber + " welcome to the frc utilities");
+            System.out.println("███████╗██████╗░░█████╗░  ████████╗░█████╗░░█████╗░██╗░░░░░░██████╗");
+            System.out.println("██╔════╝██╔══██╗██╔══██╗  ╚══██╔══╝██╔══██╗██╔══██╗██║░░░░░██╔════╝");
+            System.out.println("█████╗░░██████╔╝██║░░╚═╝  ░░░██║░░░██║░░██║██║░░██║██║░░░░░╚█████╗░");
+            System.out.println("██╔══╝░░██╔══██╗██║░░██╗  ░░░██║░░░██║░░██║██║░░██║██║░░░░░░╚═══██╗");
+            System.out.println("██║░░░░░██║░░██║╚█████╔╝  ░░░██║░░░╚█████╔╝╚█████╔╝███████╗██████╔╝");
+            System.out.println("╚═╝░░░░░╚═╝░░╚═╝░╚════╝░  ░░░╚═╝░░░░╚════╝░░╚════╝░╚══════╝╚═════╝░");
             modeSelect.ModeSelectUI();
         }
         if (configDoneString.matches("false")) {
             configurationMode.ConfigModeInit();
         }
+    }
+
+    public void TextSplashScreen() {
+        System.out.println("███████╗██████╗░░█████╗░  ████████╗░█████╗░░█████╗░██╗░░░░░░██████╗");
+        System.out.println("██╔════╝██╔══██╗██╔══██╗  ╚══██╔══╝██╔══██╗██╔══██╗██║░░░░░██╔════╝");
+        System.out.println("█████╗░░██████╔╝██║░░╚═╝  ░░░██║░░░██║░░██║██║░░██║██║░░░░░╚█████╗░");
+        System.out.println("██╔══╝░░██╔══██╗██║░░██╗  ░░░██║░░░██║░░██║██║░░██║██║░░░░░░╚═══██╗");
+        System.out.println("██║░░░░░██║░░██║╚█████╔╝  ░░░██║░░░╚█████╔╝╚█████╔╝███████╗██████╔╝");
+        System.out.println("╚═╝░░░░░╚═╝░░╚═╝░╚════╝░  ░░░╚═╝░░░░╚════╝░░╚════╝░╚══════╝╚═════╝░");
     }
 }
