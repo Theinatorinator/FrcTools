@@ -147,6 +147,7 @@ public class ToolsManager {
                 break;
         }
         //UIForWPI();
+        modeSelect.ModeSelectUI();
     }
 
 
