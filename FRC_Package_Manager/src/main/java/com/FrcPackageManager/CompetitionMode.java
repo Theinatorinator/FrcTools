@@ -37,7 +37,6 @@ public class CompetitionMode {
         String powerShellCommand = "netsh wlan connect name=" + profileName;
         //call the powershell command
         PowerShellResponse response = PowerShell.executeSingleCommand(powerShellCommand);
-        System.out.println(response);
     }
 
     public void RunDriverStation(String driveStation) {
