@@ -13,6 +13,7 @@ public class ModeSelect {
         ToolsManager toolsManager = new ToolsManager();
         Scanner scanner = new Scanner(System.in);
         String userInput;
+        System.out.println("HELP for help, or /?, or ?");
         do {
             System.out.print("Please select your mode: ");
             userInput = scanner.next().trim().toUpperCase(Locale.ROOT);

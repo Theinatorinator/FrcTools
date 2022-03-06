@@ -30,11 +30,11 @@ public class MusicMode {
             e.printStackTrace();
             System.exit(3);
         }
+        System.out.println("Welcome to Music Mode, please enter a Music Mode command");
         MusicModeMain();
     }
 
     public void MusicModeMain() {
-        System.out.println("Welcome to Music Mode, please enter a Music Mode command");
         String musicToBePlayed = MusicSelector();
         String path = StringToPath(musicToBePlayed);
         PlayMusic(path);
@@ -44,7 +44,7 @@ public class MusicMode {
         String userInput;
         //ask what music to play
         do {
-            System.out.print("Music Command: ");
+            System.out.print("MusicMode$ ");
             userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
         } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("4") && !userInput.matches("5") && !userInput.matches("6") && !userInput.matches("7") && !userInput.matches("8") && !userInput.matches("9") && !userInput.matches("10") && !userInput.matches("LOOP") && !userInput.matches("\\?") && !userInput.matches("HELP") && !userInput.matches("STOP") && !userInput.matches("VOLUME") && !userInput.matches("RADIO"));
         {

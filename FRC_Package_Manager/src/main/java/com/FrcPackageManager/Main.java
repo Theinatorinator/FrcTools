@@ -25,7 +25,7 @@ public class Main {
         String configDoneString = prop.getProperty("configDone");
         String teamNumber = prop.getProperty("teamNumber");
         if (configDoneString.matches("true")) {
-            System.out.println("Hello team " + teamNumber + " welcome to the frc utilities");
+            System.out.println("Hello team " + teamNumber + " welcome to frc tools");
             System.out.println("███████╗██████╗░░█████╗░        ████████╗░█████╗░░█████╗░██╗░░░░░░██████╗");
             System.out.println("██╔════╝██╔══██╗██╔══██╗        ╚══██╔══╝██╔══██╗██╔══██╗██║░░░░░██╔════╝");
             System.out.println("█████╗░░██████╔╝██║░░╚═╝        ░░░██║░░░██║░░██║██║░░██║██║░░░░░╚█████╗░");
