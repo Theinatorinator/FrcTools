@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ConfigurationMode {
     private final Properties prop = new Properties();
-    private final String propFileLocation = "src/main/resources/Config.properties";
+    private final String propFileLocation = System.getenv("APPDATA") + "\\FRCTools\\Properties\\Config.properties";
     private boolean musicModeConfigUI = false;
     Scanner scanner = new Scanner(System.in);
     ModeSelect modeSelect = new ModeSelect();
@@ -117,16 +117,17 @@ public class ConfigurationMode {
 
     }
     private void MusicModeConfig() {
-        prop.setProperty("song1", "C:\\Program Files\\FRC_Tools\\Music\\music1.wav");
-        prop.setProperty("song2", "C:\\Program Files\\FRC_Tools\\Music\\music2.wav");
-        prop.setProperty("song3", "C:\\Program Files\\FRC_Tools\\Music\\music3.wav");
-        prop.setProperty("song4", "C:\\Program Files\\FRC_Tools\\Music\\music4.wav");
-        prop.setProperty("song5", "C:\\Program Files\\FRC_Tools\\Music\\music5.wav");
-        prop.setProperty("song6", "C:\\Program Files\\FRC_Tools\\Music\\music6.wav");
-        prop.setProperty("song7", "C:\\Program Files\\FRC_Tools\\Music\\music7.wav");
-        prop.setProperty("song8", "C:\\Program Files\\FRC_Tools\\Music\\music8.wav");
-        prop.setProperty("song9", "C:\\Program Files\\FRC_Tools\\Music\\music9.wav");
-        prop.setProperty("song10", "C:\\Program Files\\FRC_Tools\\Music\\music10.wav");
+        String appDataDir = System.getenv("APPDATA");
+        prop.setProperty("song1", appDataDir + "\\FRCTools\\Music\\music1.wav");
+        prop.setProperty("song2", appDataDir + "\\FRCTools\\Music\\music2.wav");
+        prop.setProperty("song3", appDataDir + "\\FRCTools\\Music\\music3.wav");
+        prop.setProperty("song4", appDataDir + "\\FRCTools\\Music\\music4.wav");
+        prop.setProperty("song5", appDataDir + "\\FRCTools\\Music\\music5.wav");
+        prop.setProperty("song6", appDataDir + "\\FRCTools\\Music\\music6.wav");
+        prop.setProperty("song7", appDataDir + "\\FRCTools\\Music\\music7.wav");
+        prop.setProperty("song8", appDataDir + "\\FRCTools\\Music\\music8.wav");
+        prop.setProperty("song9", appDataDir + "\\FRCTools\\Music\\music9.wav");
+        prop.setProperty("song10", appDataDir + "\\FRCTools\\Music\\music10.wav");
         prop.setProperty("music1Name", "Air Raid Siren");
         prop.setProperty("music2Name", "Fresh Friday");
         prop.setProperty("music3Name", "GIGA CHAD");

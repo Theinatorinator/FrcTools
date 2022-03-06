@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MusicMode {
-    String propFileLocation = "src/main/resources/Config.properties";
+    String propFileLocation = System.getenv("APPDATA") + "\\FRCTools\\Properties\\Config.properties";
     Properties prop = new Properties();
     Scanner scanner = new Scanner(System.in);
     float storeVolume = 1;

@@ -18,7 +18,7 @@ public class ToolsManager {
     ModeSelect modeSelect = new ModeSelect();
     public void ToolsManagerInit() {
         try {
-            String directoryLocation = "C:\\Program Files\\FRC_Tools\\";
+            String directoryLocation = System.getenv("APPDATA") + "\\Roaming\\FRCTools\\ToolsManager";
             Files.createDirectories(Paths.get(directoryLocation));
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,14 +101,14 @@ public class ToolsManager {
     private void GetGameManual() {
         //System.out.print("test");
         String gameManualLocation = "https://firstfrc.blob.core.windows.net/frc2022/Manual/2022FRCGameManual.pdf";
-        String downloadOutput = "C:\\Program Files\\FRC_Tools\\2022GameManual.pdf";
+        String downloadOutput = System.getenv("APPDATA") +"\\FRCTools\\ToolsManager\\2022GameManual.pdf";
         System.out.println("Getting manual");
         DownloadFiles(gameManualLocation, downloadOutput);
     }
 
     private void  GetWpiLib() {
         String wpiLibLocation = "https://github.com/wpilibsuite/allwpilib/releases/download/v2022.4.1/WPILib_Windows64-2022.4.1.iso";
-        String downloadOutput = "C:\\Program Files\\FRC_Tools\\WPILib_Windows64-2022.4.1.iso";
+        String downloadOutput = System.getenv("APPDATA") + "\\FRCTools\\ToolsManager\\WPILib_Windows64-2022.4.1.iso";
         System.out.println("getting WPILIBS");
         DownloadFiles(wpiLibLocation, downloadOutput);
 
