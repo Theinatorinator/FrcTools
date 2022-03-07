@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class ConfigurationMode {
     private final Properties prop = new Properties();
@@ -13,20 +17,32 @@ public class ConfigurationMode {
     private boolean musicModeConfigUI = false;
     Scanner scanner = new Scanner(System.in);
     ModeSelect modeSelect = new ModeSelect();
-
+    Logger logger = Logger.getLogger("RunTimeLog");
+    String logFileLocation = System.getenv("APPDATA") + "\\FRCTools\\Logs\\Log";
     public void ConfigModeInit() {
+        try {
+            FileHandler fileHandler = new FileHandler(logFileLocation);
+            logger.addHandler(fileHandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+        } catch(java.io.IOException ex) {
+            ex.printStackTrace();
+        }
         try {
             FileOutputStream out = new FileOutputStream(propFileLocation);
             prop.store(out, null);
         } catch (IOException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "failed to get properties file", ex);
         }
         //Load the file, catching any exceptions
         try {
             prop.load(new FileInputStream(propFileLocation));
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
             System.exit(3);
+
+            logger.log(Level.SEVERE, "Failed to load the Properties file", ex);
         }
         SetConfigMain();
     }
@@ -147,6 +163,7 @@ public class ConfigurationMode {
             prop.store(out, null);
         }  catch (java.io.IOException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "Couldn't store properties");
         }
     }
 }

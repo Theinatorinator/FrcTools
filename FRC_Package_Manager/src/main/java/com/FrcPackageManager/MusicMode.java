@@ -9,6 +9,10 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class MusicMode {
     String propFileLocation = System.getenv("APPDATA") + "\\FRCTools\\Properties\\Config.properties";
@@ -22,12 +26,23 @@ public class MusicMode {
     int minSong = 1;
     int maxSong = 10;
     ModeSelect modeSelect = new ModeSelect();
-
+    Logger logger = Logger.getLogger("RunTimeLog");
+    String logFileLocation = System.getenv("APPDATA") + "\\FRCTools\\Logs\\Log";
     public void MusicModeInit() {
+        try {
+            FileHandler fileHandler = new FileHandler(logFileLocation);
+            logger.addHandler(fileHandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+        } catch(java.io.IOException ex) {
+            ex.printStackTrace();
+            logger.log(Level.SEVERE, "IO EXCEPTION", ex);
+        }
         try {
             prop.load(new FileInputStream(propFileLocation));
         } catch (IOException e) {
             e.printStackTrace();
+            logger.log(Level.SEVERE, "IO EXCEPTION", e);
             System.exit(3);
         }
         System.out.println("Welcome to Music Mode, please enter a Music Mode command");
@@ -128,6 +143,7 @@ public class MusicMode {
             MusicModeMain();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "AUDIO INPUT STREAM EXCEPTION", ex);
             System.exit(1);
         }
 
@@ -144,6 +160,7 @@ public class MusicMode {
             SetVolume(storeVolume);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "AUDIO PLAY EXCEPTION", ex);
             System.exit(1);
         }
 

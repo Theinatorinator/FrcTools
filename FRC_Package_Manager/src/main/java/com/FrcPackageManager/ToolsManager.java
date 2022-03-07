@@ -11,17 +11,32 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class ToolsManager {
     private final Scanner scanner = new Scanner(System.in);
     private boolean downloading = false;
     ModeSelect modeSelect = new ModeSelect();
+    Logger logger = Logger.getLogger("RunTimeLog");
+    String logFileLocation = System.getenv("APPDATA") + "\\FRCTools\\Logs\\Log";
     public void ToolsManagerInit() {
+        try {
+            FileHandler fileHandler = new FileHandler(logFileLocation);
+            logger.addHandler(fileHandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+        } catch(java.io.IOException ex) {
+            ex.printStackTrace();
+        }
         try {
             String directoryLocation = System.getenv("APPDATA") + "\\Roaming\\FRCTools\\ToolsManager";
             Files.createDirectories(Paths.get(directoryLocation));
         } catch (IOException e) {
             e.printStackTrace();
+            logger.log(Level.SEVERE, "IO EXCEPTION", e);
         }
         ToolsManagerMain();
     }
@@ -37,6 +52,7 @@ public class ToolsManager {
             website = new URL(websiteLocation);
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            logger.log(Level.SEVERE, "MALFORMED URL", e);
         }
         ReadableByteChannel rbc = null;
         try {
@@ -45,12 +61,14 @@ public class ToolsManager {
             //System.out.println("rbc");
         } catch (IOException e) {
             e.printStackTrace();
+            logger.log(Level.SEVERE, "CONNECTION TO WEBSITE FAILURE", e);
         }
         FileOutputStream fos = null;
         try {
             //System.out.println("fos");
             fos = new FileOutputStream(outputLocation);
         } catch (FileNotFoundException e) {
+            logger.log(Level.SEVERE, "FILE NOT FOUND", e);
             e.printStackTrace();
         }
 
@@ -60,6 +78,7 @@ public class ToolsManager {
             assert fos != null;
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         } catch (IOException e) {
+            logger.log(Level.SEVERE, "IO EXCEPTION", e);
             e.printStackTrace();
         }
         downloading = false;
@@ -101,14 +120,14 @@ public class ToolsManager {
     private void GetGameManual() {
         //System.out.print("test");
         String gameManualLocation = "https://firstfrc.blob.core.windows.net/frc2022/Manual/2022FRCGameManual.pdf";
-        String downloadOutput = System.getenv("APPDATA") +"\\FRCTools\\ToolsManager\\2022GameManual.pdf";
+        String downloadOutput = System.getenv("APPDATA") +"\\FRCTools\\ToolsManager\\Downloads\\2022GameManual.pdf";
         System.out.println("Getting manual");
         DownloadFiles(gameManualLocation, downloadOutput);
     }
 
     private void  GetWpiLib() {
         String wpiLibLocation = "https://github.com/wpilibsuite/allwpilib/releases/download/v2022.4.1/WPILib_Windows64-2022.4.1.iso";
-        String downloadOutput = System.getenv("APPDATA") + "\\FRCTools\\ToolsManager\\WPILib_Windows64-2022.4.1.iso";
+        String downloadOutput = System.getenv("APPDATA") + "\\FRCTools\\ToolsManager\\Downloads\\WPILib_Windows64-2022.4.1.iso";
         System.out.println("getting WPILIBS");
         DownloadFiles(wpiLibLocation, downloadOutput);
 
@@ -123,6 +142,7 @@ public class ToolsManager {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    logger.log(Level.SEVERE, "INTERRUPTED SLEEP", e);
                 }
             }
     }
