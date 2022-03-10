@@ -43,8 +43,8 @@ public class CompetitionMode {
         //Load each individual variable form the config file
         String profileName = prop.getProperty("profileName");
         String robotIPAdder = prop.getProperty("robotIPAdder");
-        NetworkConnection(profileName);
-        RunDriverStation(prop.getProperty("driverStationLocation"));
+        //NetworkConnection(profileName);
+        //RunDriverStation(prop.getProperty("driverStationLocation"));
 
     }
     private void NetworkConnection(String profileName) {

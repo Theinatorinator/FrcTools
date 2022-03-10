@@ -6,19 +6,17 @@ import java.util.Locale;
 import java.util.Scanner;
 //ask the user what mode to enter, currently this only allows from competition mode but other modes such as programing/updating are in the works
 public class ModeSelect {
+    String userInput;
     public void ModeSelectUI() {
         CompetitionMode competitionMode = new CompetitionMode();
         ConfigurationMode configurationMode = new ConfigurationMode();
         MusicMode musicMode = new MusicMode();
         ToolsManager toolsManager = new ToolsManager();
         Scanner scanner = new Scanner(System.in);
-        String userInput;
         System.out.println("HELP for help, or /?, or ?");
-        do {
+
             System.out.print("Please select your mode: ");
             userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
-
-        } while (!userInput.matches("0") && !userInput.matches("1") && !userInput.matches("2") && !userInput.matches("3") && !userInput.matches("4") && !userInput.matches("EXIT") && !userInput.matches("CONFIG") && !userInput.matches("TOOLS") && !userInput.matches("COMPETITION") && !userInput.matches("MUSIC")&& !userInput.matches("\\?") && !userInput.matches("HELP")); {
             switch (userInput) {
                 //quit on input of 0
                 case "0" -> Quit();
@@ -61,15 +59,17 @@ public class ModeSelect {
                 case "?" -> Help();
                 case "/?" -> Help();
                 case "HELP" -> Help();
+
+                //default(unknown command)
+                default -> UnknownCommand();
             }
         }
 
-    }
-    public void Quit() {
+    private void Quit() {
         System.out.println("Exiting");
         System.exit(0);
     }
-    public void Help() {
+    private void Help() {
         System.out.println("0 = quit");
         System.out.println("1= Config Mode");
         System.out.println("2= tools manager");
@@ -81,6 +81,10 @@ public class ModeSelect {
         System.out.println("COMPETITION= CompetitionMode");
         System.out.println("MUSIC= MUSIC MODE");
         System.out.println("?, /?, HELP, help = help");
+        ModeSelectUI();
+    }
+    private void UnknownCommand() {
+        System.out.println(userInput + " is not a valid mode or recognized command");
         ModeSelectUI();
     }
 }
