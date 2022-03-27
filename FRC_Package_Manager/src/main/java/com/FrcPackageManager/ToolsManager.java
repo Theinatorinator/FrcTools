@@ -1,5 +1,11 @@
 package com.FrcPackageManager;
 
+
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,6 +23,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class ToolsManager {
+
     private final Scanner scanner = new Scanner(System.in);
     private boolean downloading = false;
     ModeSelect modeSelect = new ModeSelect();
@@ -42,6 +49,9 @@ public class ToolsManager {
     }
     private void ToolsManagerMain() {
         GetDownloadChoices();
+        //CheckForWPIInstall();
+        CheckForGameManualOpen();
+        modeSelect.ModeSelectUI();
     }
     private void DownloadFiles(String websiteLocation, String outputLocation)  {
         //System.out.println("DOWNLOADING");
@@ -127,7 +137,7 @@ public class ToolsManager {
 
     private void  GetWpiLib() {
         String wpiLibLocation = "https://github.com/wpilibsuite/allwpilib/releases/download/v2022.4.1/WPILib_Windows64-2022.4.1.iso";
-        String downloadOutput = System.getenv("APPDATA") + "\\FRCTools\\ToolsManager\\Downloads\\WPILib_Windows64-2022.4.1.iso";
+        String downloadOutput = System.getenv("APPDATA") + "\\FRCTools\\ToolsManager\\Downloads\\WPILib_WindowsZIP.zip";
         System.out.println("getting WPILIBS");
         DownloadFiles(wpiLibLocation, downloadOutput);
 
@@ -167,30 +177,84 @@ public class ToolsManager {
                 break;
         }
         //UIForWPI();
-        modeSelect.ModeSelectUI();
+        return;
     }
 
-
-    /*
-    private void RunWPI() {
-        String wpiLocation = "C:\\Program Files\\FRC_Tools\\WPILib_Windows64-2022.4.1.iso";
+    private void UnzipWpiLibs() {
+        System.out.println("here1");
+        String source = System.getenv("APPDATA") + "\\FRCTools\\ToolsManager\\Downloads\\WPILib_WindowsZIP.zip";
+        String destination = System.getenv("APPDATA") + "\\FRCTools\\ToolsManager\\Extracted\\WPILib_WindowsZIP.zip";
+        String password = "password";
         try {
-            Runtime.getRuntime().exec(wpiLocation);
-        } catch (IOException e) {
+            ZipFile zipFile = new ZipFile(source);
+            System.out.println("here2");
+            zipFile.extractAll(destination);
+            System.out.println("here3");
+        } catch (ZipException e) {
             e.printStackTrace();
+            logger.log(Level.SEVERE, "error", e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.log(Level.SEVERE, "error", e);
         }
+        return;
+    }
+    private void RunWpiLibs() {
+        String wpiLibsEXELocation = "";
+        try {
+            Runtime.getRuntime().exec(wpiLibsEXELocation).waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            logger.log(Level.SEVERE, "error", e);
+        }
+        return;
+    }
+    private void CheckForWPIInstall() {
+        String userInput ="";
+        do {
+            System.out.print("would you like to install WPILibs (y/n): ");
+            userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
+
+        } while (!userInput.matches("N") && !userInput.matches("Y")); {
+            if (userInput == "Y") {
+                UnzipWpiLibs();
+                RunWpiLibs();
+            }
+        }
+        return;
+    }
+    private void CheckForGameManualOpen() {
+        String userInput ="";
+        do {
+            System.out.print("would you like to open game manual (y/n): ");
+            userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
+
+        } while (!userInput.matches("N") && !userInput.matches("Y")); {
+            if (userInput.matches("Y")) {
+                OpenGameManual();
+            }
+        }
+        return;
     }
 
-    private void UIForWPI() {
-        String userInput;
-        do {
-            System.out.print("Would you like to run WPILIBS installer (y/n):");
-            userInput = scanner.next().trim().toUpperCase(Locale.ROOT);
-        } while (!userInput.matches("N") && !userInput.matches("Y"));
-        if (userInput.equals("Y")) {
-            RunWPI();
+    private void OpenGameManual() {
+        String filepath = System.getenv("APPDATA") +"\\FRCTools\\ToolsManager\\Downloads\\2022GameManual.pdf";
+        File file = new File(filepath);
+        if (file.toString().endsWith(".pdf")) {
+            try {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        modeSelect.ModeSelectUI();
+        else {
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.open(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return;
     }
-     */
 }
