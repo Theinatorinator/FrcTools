@@ -12,7 +12,6 @@ import java.util.logging.SimpleFormatter;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         String propFileLocation = System.getenv("APPDATA") + "\\FRCTools\\Properties\\Config.properties";
         ModeSelect modeSelect = new ModeSelect();
         ConfigurationMode configurationMode = new ConfigurationMode();
